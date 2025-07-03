@@ -14,10 +14,69 @@ library(tidyverse)
 library(primer.data)
 library(tidymodels)
 library(broom)
+library(easystats)
 ```
 
-We are examining Georgia voters attitudes towards immigration. The data source being used is past survey results about immigration from a year ago or more and we attempt to examine how exposure to Spanish-speakers effects voter attitudes toward immigration? A potential weakness in our model is that we are examining voter attitudes toward immigration in Georgia today, but we are using data from a 2012 experiment with Boston commuters, but when in reality there are non-commuters in Georgia and the time period difference might have cause a difference in political ideologies for the state and people.
+We are examining Georgia voters attitudes towards immigration. The data source being used is past survey results about immigration from a year ago or more and we attempt to examine how exposure to Spanish-speakers effects voter attitudes toward immigration? A potential weakness in our model is that we are examining voter attitudes toward immigration in Georgia today, but we are using data from a 2012 experiment with Boston commuters, but when in reality there are non-commuters in Georgia and the time period difference might have cause a difference in political ideologies for the state and people. We modeled attitudes toward immigration, measured as a continuous score reflecting the favorability toward immigration policies, as a linear function of exposure to Spanish speakers. The model estimates the causal effect of this exposure on immigration attitudes among registered voters in Georgia, based on data adapted from a 2012 experiment among Boston commuters.
 
 $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_n X_n + \epsilon$$
 
 with $\epsilon \sim \mathcal{N}(0, \sigma^2)$.
+
+
+
+
+
+```{r}
+linear_reg(engine = "lm") |>
+fit(att_end ~ treatment, data = trains)|>
+tidy(conf.int = TRUE)
+fit_att <- linear_reg(engine = "lm") |> 
+  fit(att_end ~ treatment, data = trains)
+```
+
+
+
+```{r}
+#| cache: true
+
+
+
+```
+
+$$\widehat{\text{att_end}} = 8.45 + 1.55 \cdot \text{treatment}_{\text{Treated}}$$
+
+
+
+
+```{r}
+#| label: tbl-fit-results
+#| tbl-cap: "Regression Results with Estimates and Confidence Intervals"
+
+library(kableExtra)
+library(tidyverse)
+
+# Assuming fit_att is the fitted model and tidy() is called with confidence intervals
+results <- tidy(fit_att, conf.int = TRUE) %>%
+  select(term, estimate, conf.low, conf.high) %>%
+  mutate(
+    estimate = round(estimate, 2),
+    conf.low = round(conf.low, 2),
+    conf.high = round(conf.high, 2),
+    ci = paste0("[", conf.low, ", ", conf.high, "]")
+  ) %>%
+  select(term, estimate, ci)
+
+# Create a formatted table
+results %>%
+  kable(
+    col.names = c("Term", "Estimate", "95% CI"),
+    align = c("l", "c", "c"),
+    digits = 2
+  ) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE
+  )
+```
+
