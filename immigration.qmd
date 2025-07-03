@@ -2,5 +2,16 @@
 title: "XX"
 author : "Jishnu Veerapaneni"
 format: html
+
+execute: 
+    echo: false
 ---
 
+
+```{r}
+#| message: false
+library(tidyverse)
+library(primer.data)
+```
+
+We are examining Georgia voters attitudes towards immigration. The data source being used is past survey results about immigration from a year ago or more and we attempt to examine how exposure to Spanish-speakers effects voter attitudes toward immigration?
