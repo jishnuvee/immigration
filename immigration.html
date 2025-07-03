@@ -103,29 +103,19 @@ window.Quarto = {
 </header>
 
 
-<p>We are examining Georgia voters attitudes towards immigration. The data source being used is past survey results about immigration from a year ago or more and we attempt to examine how exposure to Spanish-speakers effects voter attitudes toward immigration? A potential weakness in our model is that we are examining voter attitudes toward immigration in Georgia today, but we are using data from a 2012 experiment with Boston commuters, but when in reality there are non-commuters in Georgia and the time period difference might have cause a difference in political ideologies for the state and people. We modeled attitudes toward immigration, measured as a continuous score reflecting the favorability toward immigration policies, as a linear function of exposure to Spanish speakers. The model estimates the causal effect of this exposure on immigration attitudes among registered voters in Georgia, based on data adapted from a 2012 experiment among Boston commuters.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="immigration_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We are examining Georgia voters attitudes towards immigration. The data source being used is past survey results about immigration from a year ago or more and we attempt to examine how exposure to Spanish-speakers effects voter attitudes toward immigration? A potential weakness in our model is that we are examining voter attitudes toward immigration in Georgia today, but we are using data from a 2012 experiment with Boston commuters, but when in reality there are non-commuters in Georgia and the time period difference might have cause a difference in political ideologies for the state and people. We modeled attitudes toward immigration, measured as a continuous score reflecting the favorability toward immigration policies, as a linear function of exposure to Spanish speakers. The model estimates the causal effect of this exposure on immigration attitudes among registered voters in Georgia, based on data adapted from a 2012 experiment among Boston commuters. Exposure to Spanish speakers increases immigration attitudes by 1.55 units on average, with a 95% confidence interval of [0.51, 2.58], indicating a positive effect with uncertainty in the exact magnitude.</p>
 <p><span class="math display">\[Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_n X_n + \epsilon\]</span></p>
 <p>with <span class="math inline">\(\epsilon \sim \mathcal{N}(0, \sigma^2)\)</span>.</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 7
-  term             estimate std.error statistic  p.value conf.low conf.high
-  &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-1 (Intercept)          8.45     0.347     24.3  9.18e-47    7.77       9.14
-2 treatmentTreated     1.55     0.521      2.97 3.67e- 3    0.514      2.58</code></pre>
-</div>
-</div>
-<p><span class="math display">\[\widehat{\text{att_end}} = 8.45 + 1.55 \cdot \text{treatment}_{\text{Treated}}\]</span></p>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'kableExtra'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:dplyr':
-
-    group_rows</code></pre>
-</div>
 <div id="tbl-fit-results" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fit-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
